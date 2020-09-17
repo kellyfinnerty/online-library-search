@@ -1,16 +1,7 @@
-'''
-	This program uses your default browser.
-	It searches for the title in all the overdrives provided
-
-
-	More things I could do:
-		- allow them to modify their search
-			- as they are going for one at a time or restart
-		- allow them to use a text file to get the websites
-
-'''
-
 import webbrowser
+import csv
+import pdb
+
 
 class color:
    PURPLE = '\033[95m'
@@ -25,26 +16,22 @@ class color:
    END = '\033[0m'
 
 
-urls = [
-			'https://mvlc.overdrive.com/search?query={}',
-			'https://bpl.overdrive.com/bpl-visitor/content/search?query={}',
-			'https://clamsnet.overdrive.com/clamsnet-visitor/content/search?query={}',
-			'https://cwmars.overdrive.com/cwmars-visitor/content/search?query={}',
-			'https://minuteman.overdrive.com/minuteman-visitor/content/search?query={}',
-			'https://noble.overdrive.com/noble-visitor/content/search?query={}',
-			'https://ocln.overdrive.com/ocln-visitor/content/search?query={}',
-			'https://sails.overdrive.com/sails-visitor/content/search?query={}',
-			'https://mcgill.overdrive.com/search?query={}',
-			'https://www.hoopladigital.com/search?page=1&q={}&scope=everything&type=direct',
-			'https://mvlc.ent.sirsi.net/client/en_US/manchester1/search/results?qu={}&te='
-		]
+def format(col, txt):
+ 	return col + txt + color.END
 
-def bold(txt):
- 	return color.BOLD + txt + color.END
+
+def read_file(filename):
+	global urls
+
+	with open(filename) as f:
+		reader = csv.reader(f, delimiter=",")
+		urls = [row for row in reader]
+
+	urls = urls[1:len(urls)]
 
 
 def welcome():
-	print('\n\nWelcome to ' + bold('library search!') +'\n')
+	print('\n\nWelcome to ' + format(color.BOLD, 'library search') +'!\n')
 
 	print('Here you can search for the title and/or author in all the Overdrives and other library resources provided' 
 			+ ' using your default web browser.')
@@ -67,8 +54,8 @@ def check_speed(speed):
 def user_input():
 	search = input("\nEnter a title and/or author: ")
 	print("\nDo you prefer a search all at once or one at a time?")
-	print("  (1) All at once: type '" + bold("all") + "' or any other characters")
-	print("  (2) One at a time: just press " + bold('enter'))
+	print("  (1) All at once: type '" + format(color.BOLD, "all") + "' or any other characters")
+	print("  (2) One at a time: just press " + format(color.BOLD, 'enter'))
 	speed_input = input("\nYour choice:")
 
 	return check_speed(speed_input), search
@@ -79,16 +66,22 @@ def search_fast(search):
 
 	print('\nYou are searching all at once.')
 
-	for url in urls:
+	for site_name, url in urls:
+		pdb.set_trace()
+		print(url)
 		url = url.format(search)
-
+		print(url)
 		if first_loop:
 			webbrowser.open(url, new=1, autoraise=True)
+
+			print("Searching {}".format(site_name), end="")
 			first_loop = False
 		else:
 			webbrowser.open_new_tab(url)
 
-	print('Your search is complete. I hope you found what you were looking for!')
+			print(", {}".format(site_name), end="")
+
+	print('\nYour search is complete. I hope you found what you were looking for!')
 
 
 # helper method for search_slow(search)
@@ -104,7 +97,7 @@ def search_slow(search):
 
 	print("\nYou are searching one at a time.")
 
-	for url in urls:
+	for site_name, url in urls:
 		url = url.format(search)
 
 		if first_loop:
@@ -116,7 +109,7 @@ def search_slow(search):
 		# edge case of the last one - check if this works
 		last_url = urls[-1].format(search)
 		if url != last_url:
-			usr_done = input("\nPress enter when you are ready to do the next search. \nFound what you're looking for? Type '" + bold('done') + "' to skip remaining searches. ")
+			usr_done = input("\nPress enter when you are ready to do the next search. \nFound what you're looking for? Type '" + format(color.BOLD, 'done') + "' to skip remaining searches. ")
 			
 			if check_done(usr_done):
 				break
@@ -130,6 +123,8 @@ def goodbye():
 
 
 def main():
+	read_file("urls.csv")
+
 	welcome()
 
 	while True:
