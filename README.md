@@ -2,8 +2,8 @@
 
 
 ## Description
-This python script searches a title and/or author on all the user's available online book resources - Overdrive, Hoopla, library catalogue, etc. 
 
+ebooks and audiobooks are often readily available on sites like Overdrive and Hoopla. Many people have access to multiple library systems. Each library has a different catalogue and sometimes copies aren't available at that time. Often a user much search multiple Overdrives to find an available copy, but this can be too time consuming and they may opt to buy or go on the wait list instead of continuing the search. Multiple library searches can be done at once with this python script. Users add the urls of their libraries to a csv file and can search through python command line prompts. Quickly click through the tabs until you find what you're looking for. 
 
 ## How it works
 In terminal, run `python search.py`
@@ -12,7 +12,7 @@ The command line prompt will welcome you and give instructions on how to use it.
 
 You provide the websites searched in a csv file the program reads from. (Instructions below)
 
-You will have the option to search your preferred websites all at once or one at a time, so if you find what you are looking for you can end the search.
+You will have the option to search your preferred websites all at once or one at a time (so if you find what you are looking for you can end the search).
 
 ### CSV File Instructions
 
