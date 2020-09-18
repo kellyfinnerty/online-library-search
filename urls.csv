@@ -1,12 +1,4 @@
 name, website
 MVLC, https://mvlc.overdrive.com/search?query={}
-BPL, https://bpl.overdrive.com/bpl-visitor/content/search?query={}
-Clams, https://clamsnet.overdrive.com/clamsnet-visitor/content/search?query={}
-CWMars, https://cwmars.overdrive.com/cwmars-visitor/content/search?query={}
-Minuteman, https://minuteman.overdrive.com/minuteman-visitor/content/search?query={}
-Noble, https://noble.overdrive.com/noble-visitor/content/search?query={}
-OCLN, https://ocln.overdrive.com/ocln-visitor/content/search?query={}
-Sails, https://sails.overdrive.com/sails-visitor/content/search?query={}
-McGill, https://mcgill.overdrive.com/search?query={}
 Hoopla, https://www.hoopladigital.com/search?page=1&q={}&scope=everything&type=direct
 MVLC Catalogue, https://mvlc.ent.sirsi.net/client/en_US/manchester1/search/results?qu={}&te=
