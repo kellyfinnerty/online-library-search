@@ -25,7 +25,7 @@ Open the doc in excel or your preferred text editor. In the first column, fill i
 	https://www.hoopladigital.com/search?page=1&q=The+Undocumented+Americans&scope=everything&type=direct
 2. Copy the url to excel 
 3. Replace your search term (The Undocumented Americans) with {} brackets
-	https://www.hoopladigital.com/search?page=1&q={}s&scope=everything&type=direct
+	https://www.hoopladigital.com/search?page=1&q={}&scope=everything&type=direct
 
 You can add, remove, and edit links as much as you like and the program will always draw from your latest version.
 
