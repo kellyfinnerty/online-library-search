@@ -12,6 +12,7 @@ class color:
    YELLOW = '\033[93m'
    RED = '\033[91m'
    BOLD = '\033[1m'
+   ITALICS = '\033[3m'
    UNDERLINE = '\033[4m'
    END = '\033[0m'
 
@@ -19,25 +20,28 @@ class color:
 def format(col, txt):
  	return col + txt + color.END
 
+def format_input(txt):
+ 	return input(format(color.PURPLE, txt))
+
 
 def read_file(filename):
 	global urls
 
 	with open(filename) as f:
-		reader = csv.reader(f, delimiter=",")
+		reader = csv.reader(f, delimiter=",", skipinitialspace=True)
 		urls = [row for row in reader]
 
 	urls = urls[1:len(urls)]
 
 
 def welcome():
-	print('\n\nWelcome to ' + format(color.BOLD, 'library search') +'!\n')
+	print('\n\nWelcome to ' + format(color.DARKCYAN, 'Library Search') +'!\n')
 
-	print('Here you can search for the title and/or author in all the Overdrives and other library resources provided' 
+	print('Here you can search for the title and/or author in all the Overdrives and other library resources' 
 			+ ' using your default web browser.')
 
-	print('\nSimply search as you normally would by searching a title and/or author.')
-	print('You have the option to search sites one by one or all at once.\n')
+	print('\nSimply search a title and/or author as you would normally.')
+	print('You have the option to search sites one at a time or all at once.\n')
 
 
 # check if they want to search all at once or one at a time
@@ -52,11 +56,11 @@ def check_speed(speed):
 
 
 def user_input():
-	search = input("\nEnter a title and/or author: ")
+	search = format_input("\nEnter a title and/or author: ")
 	print("\nDo you prefer a search all at once or one at a time?")
-	print("  (1) All at once: type '" + format(color.BOLD, "all") + "' or any other characters")
-	print("  (2) One at a time: just press " + format(color.BOLD, 'enter'))
-	speed_input = input("\nYour choice:")
+	print("  (1) " + format(color.YELLOW, "All at once: ") + " type " + format(color.UNDERLINE, "all") + " or any other characters")
+	print("  (2) " + format(color.YELLOW, "One at a time:") + " just " + format(color.UNDERLINE, 'press enter'))
+	speed_input = format_input("\nYour choice: ")
 
 	return check_speed(speed_input), search
 
@@ -67,10 +71,8 @@ def search_fast(search):
 	print('\nYou are searching all at once.')
 
 	for site_name, url in urls:
-		pdb.set_trace()
-		print(url)
 		url = url.format(search)
-		print(url)
+
 		if first_loop:
 			webbrowser.open(url, new=1, autoraise=True)
 
@@ -81,7 +83,7 @@ def search_fast(search):
 
 			print(", {}".format(site_name), end="")
 
-	print('\nYour search is complete. I hope you found what you were looking for!')
+	print('\n\nYour search is complete. We hope you found what you were looking for!')
 
 
 # helper method for search_slow(search)
@@ -97,8 +99,12 @@ def search_slow(search):
 
 	print("\nYou are searching one at a time.")
 
+	print("\nPress " + format(color.UNDERLINE, "enter") + " when you are ready to search the next website. " 
+			+ "\nFound what you're looking for? Type " + format(color.UNDERLINE, 'done') + " to skip remaining searches.\n")
+
 	for site_name, url in urls:
 		url = url.format(search)
+		print(format(color.ITALICS, "Searching {}...".format(site_name)))
 
 		if first_loop:
 			webbrowser.open(url, new=1, autoraise=True)
@@ -107,9 +113,9 @@ def search_slow(search):
 			webbrowser.open_new_tab(url)
 
 		# edge case of the last one - check if this works
-		last_url = urls[-1].format(search)
+		last_url = (urls[-1])[1].format(search)
 		if url != last_url:
-			usr_done = input("\nPress enter when you are ready to do the next search. \nFound what you're looking for? Type '" + format(color.BOLD, 'done') + "' to skip remaining searches. ")
+			usr_done = format_input("Continue? ")
 			
 			if check_done(usr_done):
 				break
@@ -118,7 +124,7 @@ def search_slow(search):
 
 
 def goodbye():
-	print('\n\nThank you for using search-libraries.')
+	print('\n\nThank you for using' + format(color.DARKCYAN, 'Library Search') + ".")
 	print('Enjoy your new read or listen!\n')
 
 
@@ -134,8 +140,10 @@ def main():
 		else:
 			search_slow(search)
 
-		exit = input("\nType 'exit' to quit the program. Press enter or type anything else to continue.")
-		if exit.lower() == 'exit':
+		print("\nType " + format(color.UNDERLINE, 'exit') + " or any character(s) to quit the program. Press " 
+				+ format(color.UNDERLINE, 'enter') + " to continue.")
+		exit = format_input("Input: ")
+		if exit != '':
 			break
 
 
