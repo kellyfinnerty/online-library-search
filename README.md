@@ -3,7 +3,7 @@
 
 ## Description
 
-ebooks and audiobooks are often readily available on sites like Overdrive and Hoopla. Many people have access to multiple library systems. Each library has a different catalogue and sometimes copies aren't available at that time. Often a user much search multiple Overdrives to find an available copy, but this can be too time consuming and they may opt to buy or go on the wait list instead of continuing the search. Multiple library searches can be done at once with this python script. Users add the urls of their libraries to a csv file and can search through python command line prompts. Quickly click through the tabs until you find what you're looking for. 
+ebooks and audiobooks are often readily available on sites like Overdrive and Hoopla. Many people have access to multiple library systems. Each library has a different catalogue and sometimes copies aren't available at that time. Often a user must search multiple Overdrives to find an available copy, but this can be too time consuming and they may opt to buy or go on the wait list instead of continuing the search. Multiple library searches can be done at once with this python script. Users add the urls of their libraries to a csv file and can search through python command line prompts. Quickly click through the tabs until you find what you're looking for. 
 
 ## How it works
 In terminal, run `python search.py`
